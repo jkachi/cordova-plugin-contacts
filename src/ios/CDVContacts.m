@@ -361,8 +361,8 @@
                         CDVContact* xferContact = [[CDVContact alloc] initFromABRecord:(__bridge ABRecordRef)[foundRecords objectAtIndex:k]];
                         [matches addObject:xferContact];
                         xferContact = nil;
-                        if(k == 100){
-                           continue;
+                        if(k == 250){
+                           break;
                         }
                     }
                 }
@@ -380,8 +380,8 @@
                         if (bFound) {
                             [matches addObject:testContact];
                             max++;
-                            if(max == 100){
-                               continue;
+                            if(max == 250){
+                               break;
                             }
                         }
                         testContact = nil;
