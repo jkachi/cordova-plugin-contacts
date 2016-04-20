@@ -361,6 +361,9 @@
                         CDVContact* xferContact = [[CDVContact alloc] initFromABRecord:(__bridge ABRecordRef)[foundRecords objectAtIndex:k]];
                         [matches addObject:xferContact];
                         xferContact = nil;
+                        if(k == 100){
+                           continue;
+                        }
                     }
                 }
             } else {
@@ -368,6 +371,7 @@
                 matches = [NSMutableArray arrayWithCapacity:1];
                 BOOL bFound = NO;
                 int testCount = (int)[foundRecords count];
+                int max = 0;
 
                 for (int j = 0; j < testCount; j++) {
                     CDVContact* testContact = [[CDVContact alloc] initFromABRecord:(__bridge ABRecordRef)[foundRecords objectAtIndex:j]];
@@ -375,6 +379,10 @@
                         bFound = [testContact foundValue:filter inFields:searchFields];
                         if (bFound) {
                             [matches addObject:testContact];
+                            max++;
+                            if(max == 100){
+                               continue;
+                            }
                         }
                         testContact = nil;
                     }
